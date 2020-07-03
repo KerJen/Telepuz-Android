@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.telepuz.android">
 
-    <application
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application android:networkSecurityConfig="@xml/network_config"
         android:name=".ApplicationLoader"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"

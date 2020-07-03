@@ -1,6 +1,7 @@
 package com.telepuz.android.di
 
 import com.telepuz.android.model.AuthRepository
+import com.telepuz.android.network.TelepuzWebSocketService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,9 +10,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-class AuthModule {
+class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideAuthRepository(): AuthRepository = AuthRepository()
+    fun provideAuthRepository(service: TelepuzWebSocketService): AuthRepository = AuthRepository(service)
 }

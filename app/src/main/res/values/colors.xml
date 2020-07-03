@@ -6,4 +6,5 @@
     <color name="white">#FFFFFF</color>
     <color name="colorStroke">#E0E0E0</color>
     <color name="colorHint">#BDBDBD</color>
+    <color name="colorEnterButtonDisabled">#BDBDBD</color>
 </resources>
