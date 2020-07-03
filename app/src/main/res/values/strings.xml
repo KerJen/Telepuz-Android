@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Telepuz</string>
+    <string name="slogan">Алё, ну че там с деньгами?</string>
+    <string name="nickname_input_hint">Вот она правда!</string>
+    <string name="nickname_input_header">Никнейм</string>
+    <string name="auth_enter_button_text">Войти</string>
 </resources>

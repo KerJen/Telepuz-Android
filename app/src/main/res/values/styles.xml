@@ -1,10 +1,30 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="NicknameInputStyle">
+        <item name="android:background">@drawable/nickname_input_background</item>
+        <item name="android:textSize">18sp</item>
+        <item name="hintTextColor">@color/colorHint</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:maxLength">20</item>
+        <item name="android:inputType">textPersonName</item>
+    </style>
+
+    <style name="AuthEnterButtonStyle">
+        <item name="android:background">@drawable/enter_button_background</item>
+        <item name="cornerRadius">7dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingStart">75dp</item>
+        <item name="android:paddingEnd">75dp</item>
+        <item name="android:paddingBottom">11dp</item>
+        <item name="android:paddingTop">11dp</item>
     </style>
 
 </resources>
