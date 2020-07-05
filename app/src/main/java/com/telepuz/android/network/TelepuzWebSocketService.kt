@@ -5,6 +5,11 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.telepuz.android.model.dto.EmptyDTO
+import com.telepuz.android.network.WebSocketState.CLOSED
+import com.telepuz.android.network.WebSocketState.FAILURE
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.WebSocket
@@ -15,6 +20,7 @@ class TelepuzWebSocketService {
 
     val listener = TelepuzWebSocketListener()
     private val okHttpClient = OkHttpClient()
+    private val request = Request.Builder().url("ws://35.228.119.156:5000").build()
     private lateinit var webSocketClient: WebSocket
     private val listenersPool = HashMap<String, ApiCallback<*>>()
     private val objectMapper = ObjectMapper(MessagePackFactory())
@@ -22,9 +28,9 @@ class TelepuzWebSocketService {
         .registerKotlinModule()
 
     fun connect() {
-        val request: Request = Request.Builder().url("ws://35.228.119.156:5000").build()
         webSocketClient = okHttpClient.newWebSocket(request, listener)
         listenResponses()
+        listenForDisconnect()
     }
 
     private fun listenResponses() {
@@ -40,6 +46,27 @@ class TelepuzWebSocketService {
             val response = objectMapper.treeToValue(tree, dataClass)
 
             emitter.invoke(response!!)
+        }
+    }
+
+    private fun listenForDisconnect() {
+        listener.webSocketStateCallback.add {
+            when (it) {
+                CLOSED -> {
+                    reconnect()
+                }
+                FAILURE -> {
+                    reconnect()
+                }
+            }
+        }
+    }
+
+    private fun reconnect() {
+        listenersPool.clear()
+        GlobalScope.launch {
+            delay(5000)
+            webSocketClient = okHttpClient.newWebSocket(request, listener)
         }
     }
 

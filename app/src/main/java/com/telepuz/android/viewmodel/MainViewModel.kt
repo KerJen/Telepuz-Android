@@ -14,6 +14,10 @@ class MainViewModel @ViewModelInject constructor(private val repo: MainRepositor
 
     val usersLiveData = MutableLiveData<ArrayList<User>>()
 
+    fun sendMessage() = viewModelScope.launch(Dispatchers.IO) {
+
+    }
+
     fun getAllUsers() = viewModelScope.launch(Dispatchers.IO) {
         repo.getAllUsers {
             if (it.result == Results.OK.value) {

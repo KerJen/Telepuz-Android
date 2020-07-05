@@ -16,20 +16,6 @@ class ApplicationLoader : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        telepuzWebSocketService.listener.webSocketStateCallback = {
-            when(it){
-                WebSocketState.CONNECTED -> {
-                    Log.d("state", "connected")
-                }
-                WebSocketState.FAILURE ->{
-                    Log.d("state", "FAILURE")
-                }
-                WebSocketState.CLOSED ->{
-                    Log.d("state", "CLOSED")
-                }
-            }
-        }
 
-        telepuzWebSocketService.connect()
     }
 }

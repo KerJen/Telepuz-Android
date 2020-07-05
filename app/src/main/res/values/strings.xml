@@ -6,4 +6,7 @@
     <string name="auth_enter_button_text">Войти</string>
     <string name="auth_loading_button_text">Загрузка…</string>
     <string name="sign">Made for fun with love</string>
+    <string name="no_internet_connection">Кажется Ваш интернет принял иудаизм…</string>
+    <string name="connecting">Подключение...</string>
+    <string name="oops">Упс :0</string>
 </resources>
