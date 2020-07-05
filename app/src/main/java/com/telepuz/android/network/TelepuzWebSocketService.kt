@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import com.telepuz.android.model.dto.EmptyDTO
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.WebSocket
@@ -35,7 +36,7 @@ class TelepuzWebSocketService {
             val emitter = listenersPool[methodName]?.observableEmitter as (Any) -> (Unit)
             val dataClass = listenersPool[methodName]?.dataClass
 
-            val tree = objectMapper.readTree(it.copyOfRange(methodBytesLength+1, it.size))
+            val tree = objectMapper.readTree(it.copyOfRange(methodBytesLength + 1, it.size))
             val response = objectMapper.treeToValue(tree, dataClass)
 
             emitter.invoke(response!!)
@@ -45,6 +46,14 @@ class TelepuzWebSocketService {
     fun <T> request(method: String, data: T) {
         val serializedMethodName = objectMapper.writeValueAsBytes(method)
         val serializedData = objectMapper.writeValueAsBytes(data)
+        val serialized = serializedMethodName + serializedData
+
+        webSocketClient.send(serialized.toByteString())
+    }
+
+    fun request(method: String) {
+        val serializedMethodName = objectMapper.writeValueAsBytes(method)
+        val serializedData = objectMapper.writeValueAsBytes(EmptyDTO())
         val serialized = serializedMethodName + serializedData
 
         webSocketClient.send(serialized.toByteString())

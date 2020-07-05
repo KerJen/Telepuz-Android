@@ -1,7 +1,7 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/colorBackground</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -25,6 +25,19 @@
         <item name="android:paddingEnd">75dp</item>
         <item name="android:paddingBottom">11dp</item>
         <item name="android:paddingTop">11dp</item>
+    </style>
+
+    <style name="TabLayout" parent="">
+        <item name="tabMode">scrollable</item>
+        <item name="android:minHeight">@dimen/tab_height</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabIndicatorColor">@color/colorAccent</item>
+        <item name="tabIndicator">@drawable/tab_indicator</item>
+        <item name="tabIndicatorHeight">@dimen/tab_indicator_height</item>
+        <item name="tabPaddingEnd">@dimen/tab_half_of_margin</item>
+        <item name="tabPaddingStart">@dimen/tab_half_of_margin</item>
+        <item name="tabSelectedTextColor">@color/colorAccent</item>
+        <item name="tabGravity">center</item>
     </style>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.telepuz.android.model
+package com.telepuz.android.model.repository
 
 import com.telepuz.android.model.dto.NicknameRequestDTO
 import com.telepuz.android.model.dto.NicknameResponseDTO

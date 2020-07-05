@@ -25,7 +25,8 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?
+    ): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -36,7 +37,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             if (it.first) {
                 (activity as AppActivity).openChatFragment()
             } else {
-                enterButton.isEnabled = true
+                setStateEnterButton()
             }
         }
 
@@ -53,7 +54,18 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         }
 
         linkText.setOnClickListener {
+            setStateLoadingButton()
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://teleg.run/kerjen")))
         }
+    }
+
+    private fun setStateEnterButton() {
+        enterButton.isEnabled = true
+        enterButton.setText(R.string.auth_enter_button_text)
+    }
+
+    private fun setStateLoadingButton() {
+        enterButton.isEnabled = false
+        enterButton.setText(R.string.auth_loading_button_text)
     }
 }

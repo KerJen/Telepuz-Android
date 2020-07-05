@@ -4,5 +4,6 @@
     <string name="nickname_input_hint">Вот она правда!</string>
     <string name="nickname_input_header">Никнейм</string>
     <string name="auth_enter_button_text">Войти</string>
+    <string name="auth_loading_button_text">Загрузка…</string>
     <string name="sign">Made for fun with love</string>
 </resources>
