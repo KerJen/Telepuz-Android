@@ -1,8 +1,8 @@
 package com.telepuz.android.model
 
+import android.graphics.Color
 import com.telepuz.android.helper.avatarColors
-import com.telepuz.android.helper.byteToInt
-import com.telepuz.android.helper.hashBytes
+import kotlin.math.abs
 
 data class User(
     val id: String,
@@ -10,7 +10,7 @@ data class User(
     val status: String
 ) {
     fun getAvatarBackground() =
-        avatarColors[byteToInt(hashBytes(nickname, "SHA-256")) % avatarColors.size]
+        Color.parseColor(avatarColors[abs(nickname.hashCode()) % avatarColors.size])
 
-    fun getFirstLetter() = nickname[0]
+    fun getFirstLetter() = nickname[0].toUpperCase().toString()
 }

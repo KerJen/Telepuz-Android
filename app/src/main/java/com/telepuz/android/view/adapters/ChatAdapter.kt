@@ -7,9 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.telepuz.android.R
 import com.telepuz.android.model.Message
+import com.telepuz.android.view.custom.BackgroundAvatarView
 
 class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var messages = mutableListOf<Message>()
+    var messages = ArrayList<Message>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -26,14 +27,13 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (messages[position].yours) 0 else 1
-    }
+    override fun getItemViewType(position: Int) = if (messages[position].yours) 0 else 1
 
     override fun getItemCount() = messages.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val message = messages[position]
+        val user = messages[position].user
 
         when (holder.itemViewType) {
             0 -> {
@@ -43,13 +43,16 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             else -> {
                 val anotherMessageHolder = holder as AnotherMessageHolder
 
-                //TODO: Add avatar init
-
                 if (position > 0 && messages[position - 1].userId != messages[position].userId) {
                     anotherMessageHolder.nickname.visibility = View.GONE
+                } else {
+                    anotherMessageHolder.avatar.setAvatar(
+                        user.getFirstLetter(),
+                        user.getAvatarBackground()
+                    )
+                    anotherMessageHolder.nickname.text = message.user.nickname
                 }
 
-                anotherMessageHolder.nickname.text = message.user.nickname
                 anotherMessageHolder.text.text = message.text
             }
         }
@@ -60,6 +63,7 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class AnotherMessageHolder(item: View) : RecyclerView.ViewHolder(item) {
+        var avatar: BackgroundAvatarView = item.findViewById(R.id.anotherMessageAvatar)
         var nickname: TextView = item.findViewById(R.id.anotherMessageNickname)
         var text: TextView = item.findViewById(R.id.anotherMessageText)
     }

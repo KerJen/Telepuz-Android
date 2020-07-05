@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.telepuz.android.view.custom.BackgroundAvatarView
+        android:id="@+id/anotherMessageAvatar"
         android:layout_width="30dp"
         android:layout_height="30dp" />
 

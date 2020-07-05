@@ -16,7 +16,6 @@ import com.telepuz.android.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_auth.*
 
-
 @AndroidEntryPoint
 class AuthFragment : Fragment(R.layout.fragment_auth) {
 
