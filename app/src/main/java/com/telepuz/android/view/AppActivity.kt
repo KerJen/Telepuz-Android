@@ -6,7 +6,7 @@ import androidx.fragment.app.commit
 import com.telepuz.android.R
 import com.telepuz.android.helper.setPopAnimation
 import com.telepuz.android.network.TelepuzWebSocketService
-import com.telepuz.android.network.WebSocketState.*
+import com.telepuz.android.network.WebSocketState.CONNECTED
 import com.telepuz.android.view.fragments.AuthFragment
 import com.telepuz.android.view.fragments.MainFragment
 import com.telepuz.android.view.fragments.NoInternetFragment
@@ -21,23 +21,17 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         telepuzWebSocketService.listener.webSocketStateCallback.add {
             when (it) {
                 CONNECTED -> {
                     openAuthFragment()
                 }
-                FAILURE -> {
-                    if (supportFragmentManager.findFragmentById(R.id.fragmentContainer) !is NoInternetFragment)
-                        openNoInternetFragment()
-                }
-                CLOSED -> {
+                else -> {
                     if (supportFragmentManager.findFragmentById(R.id.fragmentContainer) !is NoInternetFragment)
                         openNoInternetFragment()
                 }
             }
         }
-
         telepuzWebSocketService.connect()
     }
 
@@ -60,5 +54,10 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
             setPopAnimation()
             replace(R.id.fragmentContainer, MainFragment())
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        telepuzWebSocketService.listener.webSocketStateCallback.clear()
     }
 }

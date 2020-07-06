@@ -11,5 +11,5 @@
         android:width="@dimen/strokeWidth"
         android:color="@color/colorStroke" />
 
-    <corners android:radius="30dp" />
+    <corners android:radius="20dp" />
 </shape>

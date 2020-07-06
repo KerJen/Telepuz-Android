@@ -33,24 +33,26 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val message = messages[position]
-        val user = messages[position].user
+        val user = message.user
 
         when (holder.itemViewType) {
             0 -> {
                 val yourMessageHolder = holder as YourMessageHolder
-                yourMessageHolder.text.text = messages[position].text
+                yourMessageHolder.text.text = message.text
             }
             else -> {
                 val anotherMessageHolder = holder as AnotherMessageHolder
 
-                if (position > 0 && messages[position - 1].userId != messages[position].userId) {
+                if (position > 0 && messages[position - 1].userId == message.userId) {
                     anotherMessageHolder.nickname.visibility = View.GONE
+                    anotherMessageHolder.avatar.visibility = View.INVISIBLE
                 } else {
                     anotherMessageHolder.avatar.setAvatar(
-                        user.getFirstLetter(),
-                        user.getAvatarBackground()
+                        user!!.getFirstLetter(),
+                        user.getColor()
                     )
-                    anotherMessageHolder.nickname.text = message.user.nickname
+                    anotherMessageHolder.nickname.setTextColor(user.getColor())
+                    anotherMessageHolder.nickname.text = user.nickname
                 }
 
                 anotherMessageHolder.text.text = message.text

@@ -3,10 +3,7 @@ package com.telepuz.android.viewmodel
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.telepuz.android.model.repository.AuthRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class AuthViewModel @ViewModelInject constructor(private val repo: AuthRepository) : ViewModel() {
 
@@ -15,14 +12,14 @@ class AuthViewModel @ViewModelInject constructor(private val repo: AuthRepositor
     val nicknameResponseLiveData = MutableLiveData<Pair<Boolean, String>>()
     val nicknameRegexLiveData = MutableLiveData<Boolean>()
 
-    fun sendNickname(nickname: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun sendNickname(nickname: String) {
         repo.sendNickname(nickname) {
             //TODO: исправить
             nicknameResponseLiveData.postValue((it.result == 0) to it.userId)
         }
     }
 
-    fun checkNickname(nickname: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun checkNickname(nickname: String) {
         if (nicknameRegex.matches(nickname)) {
             nicknameRegexLiveData.postValue(true)
         } else {

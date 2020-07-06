@@ -3,9 +3,9 @@ package com.telepuz.android.model
 import com.fasterxml.jackson.annotation.JsonIgnore
 
 data class Message(
-    val id: String,
+    var id: String,
     val userId: String,
     val text: String,
     @JsonIgnore val yours: Boolean,
-    val user: User
+    @JsonIgnore var user: User?
 )

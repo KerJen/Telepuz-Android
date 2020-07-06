@@ -12,14 +12,16 @@ import com.telepuz.android.R
 import kotlin.math.min
 
 class BackgroundAvatarView : View {
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val textPaint = Paint().apply {
+    private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = context.getColor(R.color.white)
+    }
+    private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = context.getColor(R.color.white)
         //TODO: Implement typeface cache
         typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
     }
     private val textBound = Rect()
-    private var letter: String? = null
+    private var letter = ""
 
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
@@ -54,6 +56,6 @@ class BackgroundAvatarView : View {
         val textX = measuredWidth / 2F - textBound.exactCenterX()
         val textY = measuredHeight / 2F - textBound.exactCenterY()
 
-        canvas.drawText(letter!!, textX, textY, textPaint)
+        canvas.drawText(letter, textX, textY, textPaint)
     }
 }

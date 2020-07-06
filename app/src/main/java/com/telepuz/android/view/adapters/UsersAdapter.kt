@@ -24,7 +24,7 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.UserHolder>() {
 
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         val user = users[position]
-        holder.avatar.setAvatar(user.getFirstLetter(), user.getAvatarBackground())
+        holder.avatar.setAvatar(user.getFirstLetter(), user.getColor())
         holder.nickname.text = user.nickname
         holder.status.text = user.status
     }

@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
     android:orientation="horizontal">
 
     <com.telepuz.android.view.custom.BackgroundAvatarView
         android:id="@+id/anotherMessageAvatar"
-        android:layout_width="30dp"
-        android:layout_height="30dp" />
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:background="@drawable/another_message_background"
+        android:maxWidth="250dp"
         android:orientation="vertical">
 
         <TextView
@@ -22,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="theMax"
             android:textColor="#FF0000"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/anotherMessageText"
@@ -30,6 +32,6 @@
             android:layout_height="wrap_content"
             android:text="Привет"
             android:textColor="@color/colorText"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

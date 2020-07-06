@@ -9,7 +9,7 @@ data class User(
     val nickname: String,
     val status: String
 ) {
-    fun getAvatarBackground() =
+    fun getColor() =
         Color.parseColor(avatarColors[abs(nickname.hashCode()) % avatarColors.size])
 
     fun getFirstLetter() = nickname[0].toUpperCase().toString()

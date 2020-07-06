@@ -1,5 +1,6 @@
 package com.telepuz.android.network
 
+import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -35,17 +36,21 @@ class TelepuzWebSocketService {
 
     private fun listenResponses() {
         listener.webSocketMessageCallback = {
-            val methodName = objectMapper.readValue<String>(it)
-            val methodBytesLength = methodName.toByteArray().size
+            try {
+                val methodName = objectMapper.readValue<String>(it)
+                val methodBytesLength = methodName.toByteArray().size
 
-            @Suppress("UNCHECKED_CAST")
-            val emitter = listenersPool[methodName]?.observableEmitter as (Any) -> (Unit)
-            val dataClass = listenersPool[methodName]?.dataClass
+                @Suppress("UNCHECKED_CAST")
+                val emitter = listenersPool[methodName]?.observableEmitter as (Any) -> (Unit)
+                val dataClass = listenersPool[methodName]?.dataClass
 
-            val tree = objectMapper.readTree(it.copyOfRange(methodBytesLength + 1, it.size))
-            val response = objectMapper.treeToValue(tree, dataClass)
+                val tree = objectMapper.readTree(it.copyOfRange(methodBytesLength + 1, it.size))
+                val response = objectMapper.treeToValue(tree, dataClass)
 
-            emitter.invoke(response!!)
+                emitter.invoke(response!!)
+            } catch (e: Exception){
+                Log.d("Error", e.message.toString())
+            }
         }
     }
 

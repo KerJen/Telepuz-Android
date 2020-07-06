@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:gravity="end">
 
     <TextView
@@ -9,6 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/your_message_background"
-        android:text="Тестовый процесс"
-        android:textColor="@color/white" />
+        android:maxWidth="300dp"
+        android:text="Тестовый пdddddddddddddddddddddddроцесс"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 </LinearLayout>
