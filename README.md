@@ -1,48 +1,44 @@
 ![Telepuz](HeaderTelepuz.png)
 
-## Что такое Telepuz
-Telepuz - это одна публичная комната-чат, в которой можно болтать с кем угодно и о чем угодно.
+## What is Telepuz?
+Telepuz is one public chat room where you can chat with anyone and about anything.
 
-## Для чего разрабатывалось? 
-Чат создавался в учебных и развлекательных целях
+## What was it developed for?
+The chat was created for educational and entertainment purposes
 
-## Использование кода
-Копируйте, изменяйте, дорабатывайте и берите полезные практики из приложения, мне не жалко :)
+## Using code
+Copy, modify, refine and take useful practices from the app
 
-## Стек
-В Telepuz применено много разных технологий и практик, которые используются для создание больших и качественных Android-приложений:
-* **Kotlin** - язык программирования.
-* **Custom View** - аватарки пользователей сделаны, как кастомная view, в которой прорисовывается цветной круг и текст на нем
-* **MVVM (Model ViewModel Model)** - архитектура, на которой строится Telepuz. Позволяет разграничивать бизнес-логику и дизайн.
-* **Dagger - Hilt** - фреймворк внедерения зависимостей, использован подмодуль Hilt для лучшей работы с ViewModel
-* **WebSocket** - протокол передачи данных по TCP, позволяет передавать данные в live-режиме, не делая запроса на сервер.
-* **MessagePack** - формат обмена данными между клиентом и сервером. Был выбран из-за ряды преимуществ: скорость сериализации/десериализации, меньший объем сериализованного объекта, чем у JSON
+## Skills
+Telepuz uses many different technologies and practices that are used to create large and high-quality Android applications:
+* **Kotlin** - programming language;
+* **Custom View** - user avatars are made as a custom view, which draws a colored circle and text on it;
+* **MVVM (Model ViewModel Model)** - the architecture that Telepuz is built on. Allows you to differentiate between business logic and design;
+* **Dagger - Hilt** - dependency injection framework, using the Hill submodule to better work with the ViewModel;
+* **WebSocket** - the TCP data transfer Protocol allows you to transmit data in live mode without making a request to the server;
+* **MessagePack** - format for data exchange between the client and the server. It was chosen because of a number of advantages: speed of serialization/deserialization, smaller volume of serialized object than JSON;
 
-## Краткое описание работы программы
-### Обмен данными между клиентом и сервером
-Поверх WebSocket был написан **мини-протокол**, который вводит понятие метода и данных, отправляемых на этот метод. Так как WebSocket передает только байты, потребовалось разработать свой способ их сериализовывать.
+## Brief description of the program
+### Data exchange between the client and the server
+A **mini-protocol** was written on top of WebSocket, which introduces the concept of a method and the data sent to this method. Since WebSocket only transmits bytes, we had to develop our own way to serialize them.
 
-* **Пул прослушиваемых методов** - специальный словарь, в который записываются коллбеки тех методов, которые мы хотим прослушать, когда реализовываем бизнес-логику.
+* **Pool of listened methods** - a special dictionary that records callbacks of the methods that we want to listen to when implementing business logic.
+For example:
 
-Пример:
-
- `client.on("user.create", data)` - запускаем прослушивание метода, помещая его в пул всех методов. Когда сервер пришлет на `user.create` данные, мини-протокол найдет его в словаре и вызовет коллбек, отправляя в него ответ от сервера.
-
- * **Сериализатор MessagePack** - Был создан отдельный класс для сериализации/десериализации MsgPack, умеющий работать с пулом методов, а также форматом запросов/ответов, утвержденным на сервере.
+ `client.on("user.create", data)` - start listening for the method, placing it in the pool of all methods. When the server sends data to 'user.create', the mini-Protocol will find it in the dictionary and call a callback, sending a response from the server to it.
 
 ---
 
-## Кто разрабатывал?
+## Who developed it?
 
-Над приложением трудились два человека:
+Two people worked on the app:
 
-* [KerJen](https://github.com/KerJen) - разработчик Android-версии Telepuz.
-* [undefined](https://github.com/undefined7887) - разработчик серверной части (Backend) Telepuz.
+* [KerJen](https://github.com/KerJen) - Android-developer of Telepuz.
+* [undefined](https://github.com/undefined7887) - backend-end developer of Telepuz.
 
-## Полезные ссылки
-[Backend](https://github.com/undefined7887/telepuz-backend) - репозиторий серверной части на языке Go
+## Useful links
+[Backend](https://github.com/undefined7887/telepuz-backend) - repository of the server part in Golang
 
-## Контакты
-* [KerJen - Антон Янкин](https://vk.com/kerjen)
-* [undefined - Ярослав Евстафьев](https://vk.com/undefined7887)
-
+## Contacts
+* KerJen - Anton Iankin - @KerJen (Telegram)
+* undefined - Iaroslav Evstafiev - @undefined7887 (Telegram)
