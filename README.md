@@ -13,8 +13,8 @@ Copy, modify, refine and take useful practices from the app
 Telepuz uses many different technologies and practices that are used to create large and high-quality Android applications:
 * **Kotlin** - programming language;
 * **Custom View** - user avatars are made as a custom view, which draws a colored circle and text on it;
-* **MVVM (Model ViewModel Model)** - the architecture that Telepuz is built on. Allows you to differentiate between business logic and design;
-* **Dagger - Hilt** - dependency injection framework, using the Hill submodule to better work with the ViewModel;
+* **MVVM (Model View ViewModel)** - the architecture that Telepuz is built on. Allows you to differentiate between business logic and design;
+* **Dagger - Hilt** - dependency injection framework, using the Hilt submodule to better work with the ViewModel;
 * **WebSocket** - the TCP data transfer Protocol allows you to transmit data in live mode without making a request to the server;
 * **MessagePack** - format for data exchange between the client and the server. It was chosen because of a number of advantages: speed of serialization/deserialization, smaller volume of serialized object than JSON;
 
